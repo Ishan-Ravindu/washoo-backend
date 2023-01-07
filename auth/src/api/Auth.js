@@ -40,4 +40,25 @@ module.exports = (app, channel) => {
       }
     }
   );
+
+  app.post(
+    "/signup",
+    signInValidationRules,
+    validate,
+    async (req, res, next) => {
+      try {
+        const { id, email, password, roll } = req.body;
+        const { data } = await service.SignUp({
+          id,
+          email,
+          password,
+          roll,
+        });
+        res.json(data);
+      } catch (err) {
+        console.log(err);
+        new AppError(err.statusCode || 500, err.message, res).send();
+      }
+    }
+  );
 };
