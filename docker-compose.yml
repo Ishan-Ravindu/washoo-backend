@@ -1,5 +1,6 @@
 version: "3"
 services:
+
   nosql-db:
     image: mongo
     ports:
@@ -7,6 +8,7 @@ services:
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
+
   auth:
     build:
       dockerfile: Dockerfile
@@ -23,6 +25,7 @@ services:
 
     env_file:
       - ./auth/.env.dev
+
   branch:
     build:
       dockerfile: Dockerfile
@@ -38,22 +41,7 @@ services:
       - /app/branch/node_modules
     env_file:
       - ./branch/.env.dev
-  operation:
-    build:
-      dockerfile: Dockerfile
-      context: ./operation
-    container_name: operation
-    ports:
-      - "8003:8003"
-    restart: always
-    depends_on:
-      - "nosql-db"
 
-    volumes:
-      - .:/app/
-      - /app/operation/node_modules
-    env_file:
-      - ./operation/.env.dev
   user:
     build:
       dockerfile: Dockerfile
@@ -70,14 +58,3 @@ services:
       - /app/user/node_modules
     env_file:
       - ./user/.env.dev
-  nginx-proxy:
-    build:
-      dockerfile: Dockerfile
-      context: ./proxy
-    depends_on:
-      - auth
-      - branch
-      - operation
-      - user
-    ports:
-      - 80:80
