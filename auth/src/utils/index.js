@@ -23,12 +23,12 @@ module.exports.ValidatePassword = async (
   return (await this.GeneratePassword(enteredPassword, salt)) === savedPassword;
 };
 
-module.exports.GenerateToken = async (id, email, role) => {
+module.exports.GenerateToken = async (id, email, roll) => {
   const token = jwt.sign(
     {
       id,
       email,
-      role,
+      roll,
     },
     APP_SECRET
   );

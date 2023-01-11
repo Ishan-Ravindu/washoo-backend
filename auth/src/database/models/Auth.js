@@ -8,11 +8,7 @@ const AuthSchema = new Schema(
     email: { type: String, require: true },
     password: { type: String, require: true },
     salt: { type: String, require: true },
-    role: {
-      type: String,
-      enum: ["customer", "laundryOwner", "admin"],
-      default: "customer",
-    },
+    roll: { type: String, require: true },
     is_active: { type: Boolean, require: true },
   },
   {

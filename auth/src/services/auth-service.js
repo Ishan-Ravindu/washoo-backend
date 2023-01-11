@@ -16,8 +16,8 @@ class AuthService {
 
   async SignUp(userInputs) {
     try {
-      const { id, email, password, role } = userInputs;
-
+      const { id, email, password, roll } = userInputs;
+      console.log(roll);
       let salt = await GenerateSalt();
 
       let authPassword = await GeneratePassword(password, salt);
@@ -29,7 +29,7 @@ class AuthService {
         email,
         password: authPassword,
         salt,
-        role,
+        roll,
       });
 
       console.log("created...", newAuth);
@@ -61,12 +61,12 @@ class AuthService {
           const token = await GenerateToken({
             email: existingAuth.email,
             id: existingAuth.user_name,
-            role: existingAuth.role,
+            roll: existingAuth.roll,
           });
           return FormateData({
             id: existingAuth.user_name,
             token,
-            role: existingAuth.role,
+            roll: existingAuth.roll,
           });
         } else {
           throw new APIError(
@@ -129,9 +129,9 @@ class AuthService {
     const { event, data } = payload;
     switch (event) {
       case "SIGN_UP":
-        const { id, email, password, role } = data;
+        const { id, email, password, roll } = data;
         console.log("recived...", data);
-        return this.SignUp({ id, email, password, role });
+        return this.SignUp({ id, email, password, roll });
         break;
       default:
         break;

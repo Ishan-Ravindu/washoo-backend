@@ -4,14 +4,14 @@ const { APIError, STATUS_CODES } = require("../../utils/app-errors");
 
 //Dealing with data base operations
 class AuthRepository {
-  async SignUp({ id, email, password, salt, role }) {
+  async SignUp({ id, email, password, salt, roll }) {
     try {
       const auth = new AuthSchema({
         user_name: id,
         email,
         password,
         salt,
-        role,
+        roll,
         is_active: true,
       });
 

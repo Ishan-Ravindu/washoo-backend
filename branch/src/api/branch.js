@@ -35,7 +35,7 @@ module.exports = (app, channel) => {
         await RPCRequest(
           BRANCH_RPC,
           JSON.stringify({
-            data: { id: data.branch_id, email, password, role: "branch" },
+            data: { id: data.branch_id, email, password, roll: "branch" },
             event: "SIGN_UP",
           })
         );

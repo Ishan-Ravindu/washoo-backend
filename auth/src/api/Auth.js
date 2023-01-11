@@ -48,6 +48,7 @@ module.exports = (app, channel) => {
     async (req, res, next) => {
       try {
         const { id, email, password, roll } = req.body;
+        console.log(roll);
         const { data } = await service.SignUp({
           id,
           email,

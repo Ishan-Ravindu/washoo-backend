@@ -60,7 +60,7 @@ module.exports = (app, channel) => {
         await RPCRequest(
           CUSTOMER_RPC,
           JSON.stringify({
-            data: { id: data.user_id, email, password, role: "user" },
+            data: { id: data.user_id, email, password, roll: "user" },
             event: "SIGN_UP",
           })
         );
